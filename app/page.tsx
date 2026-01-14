@@ -1,126 +1,150 @@
 import Link from "next/link";
+import { Navbar } from "@/components/navbar";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Sparkles, Zap, Shield, Rocket, ArrowRight, LayoutTemplate } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { ArrowRight, Sparkles, Layout, Zap, Bot, ShieldCheck } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col">
-      {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center space-y-10 px-4 py-24 text-center md:py-32 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background">
-        <div className="space-y-4 max-w-3xl">
-          <div className="inline-flex items-center rounded-full border bg-background px-3 py-1 text-sm font-medium text-muted-foreground shadow-sm">
-            <Sparkles className="mr-2 h-4 w-4 text-primary" />
-            NovaKit AI Launch 2026
-          </div>
-          <h1 className="text-4xl font-bold tracking-tight sm:text-7xl">
-            Ship your <span className="text-primary">AI SaaS</span> in hours, not weeks.
-          </h1>
-          <p className="mx-auto max-w-[700px] text-lg text-muted-foreground md:text-xl">
-            The ultimate Next.js starter kit with Earthy design, AI integration, and zero bloat. Built for the modern developer.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 sm:flex-row">
-          <Link href="/dashboard">
-            <Button size="lg" className="h-12 px-8 text-base">
-              Get Started
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
-          <Link href="https://github.com/your-repo/novakit-ai" target="_blank">
-            <Button variant="outline" size="lg" className="h-12 px-8 text-base">
-              View on GitHub
-            </Button>
-          </Link>
-        </div>
-      </section>
+    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/20">
+      <Navbar />
 
-      {/* Bento Grid Features */}
-      <section className="container mx-auto px-4 py-20">
-        <h2 className="mb-12 text-center text-3xl font-bold tracking-tight">Everything you need to ship</h2>
-        <div className="grid gap-4 md:grid-cols-3 md:gap-8 lg:grid-cols-4">
+      {/* Grid Background */}
+      <div className="fixed inset-0 z-0 pointer-events-none bg-grid-pattern opacity-[0.2]" />
 
-          {/* Feature 1: AI Ready (Large) */}
-          <Card className="col-span-full md:col-span-2 lg:col-span-2 row-span-2 bg-gradient-to-br from-primary/5 to-background border-primary/20">
-            <CardHeader>
-              <Sparkles className="h-8 w-8 text-primary mb-2" />
-              <CardTitle className="text-2xl">AI Integration Ready</CardTitle>
-              <CardDescription className="text-base">
-                Built-in Server Actions for Gemini, OpenAI, or Claude. Includes a ready-to-use chat interface.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="flex items-center justify-center p-8">
-              <div className="w-full max-w-sm rounded-lg border bg-background p-4 shadow-sm">
-                <div className="flex gap-2 mb-4">
-                  <div className="w-8 h-8 rounded-full bg-primary/20" />
-                  <div className="flex-1 space-y-2">
-                    <div className="h-2 w-20 bg-muted rounded" />
-                    <div className="h-16 w-full bg-muted/50 rounded" />
+      {/* Ambient Glows */}
+      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/20 blur-[120px] rounded-full pointer-events-none opacity-50 z-0" />
+
+      <main className="relative z-10 pt-32 pb-20">
+
+        {/* HERO SECTION */}
+        <section className="container mx-auto px-4 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+
+            {/* Left: Content */}
+            <div className="space-y-6 text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 rounded-full border border-border/50 bg-background/50 px-3 py-1 text-sm text-primary backdrop-blur-sm shadow-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                </span>
+                v1.0 Public Beta is Live
+              </div>
+
+              <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-foreground leading-[1.1]">
+                Ship your next <br />
+                <span className="text-primary transparent-text-outline">SaaS </span>
+                faster.
+              </h1>
+
+              <p className="text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                The ultimate Next.js 15 starter kit. Earthy aesthetics, AI integration, and robust authentication—pre-configured for 2026.
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+                <Link href="/dashboard">
+                  <Button size="lg" className="rounded-full px-8 h-12 text-base shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all">
+                    Get Started Free
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+                <div className="flex items-center -space-x-2">
+                  {[1, 2, 3, 4].map(i => (
+                    <div key={i} className="h-10 w-10 rounded-full border-2 border-background bg-muted flex items-center justify-center text-xs font-bold text-muted-foreground">U{i}</div>
+                  ))}
+                  <div className="pl-3 text-sm text-muted-foreground">
+                    <span className="font-bold text-foreground">2k+</span> Makers
                   </div>
                 </div>
-                <div className="flex gap-2">
-                  <div className="w-8 h-8 rounded-full bg-muted" />
-                  <div className="h-8 flex-1 bg-muted/20 rounded" />
+              </div>
+            </div>
+
+            {/* Right: Visual Mockup */}
+            <div className="relative mx-auto w-full max-w-[600px] lg:max-w-none perspective-1000">
+              {/* Abstract decorative elements */}
+              <div className="absolute -top-10 -right-10 w-40 h-40 bg-accent rounded-full blur-3xl opacity-60 animate-pulse" />
+              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-primary/30 rounded-full blur-3xl opacity-60" />
+
+              {/* Main Card */}
+              <div className="relative rounded-2xl border border-border/50 bg-background/40 backdrop-blur-xl shadow-2xl p-2 transform rotate-y-[-5deg] hover:rotate-y-0 transition-transform duration-500">
+                <div className="rounded-xl border border-border/50 bg-card/80 overflow-hidden shadow-sm">
+                  {/* Mock Browser Header */}
+                  <div className="h-8 border-b bg-muted/30 flex items-center px-4 gap-2">
+                    <div className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
+                    <div className="h-2.5 w-2.5 rounded-full bg-yellow-400/80" />
+                    <div className="h-2.5 w-2.5 rounded-full bg-green-400/80" />
+                  </div>
+                  {/* Mock Content */}
+                  <div className="p-6 space-y-4">
+                    <div className="flex justify-between items-center">
+                      <div className="h-8 w-32 bg-foreground/10 rounded-lg animate-pulse" />
+                      <div className="h-8 w-8 bg-primary/20 rounded-full" />
+                    </div>
+                    <div className="grid grid-cols-3 gap-4">
+                      {[1, 2, 3].map(i => (
+                        <div key={i} className="h-24 rounded-lg bg-muted/50 border border-border/50 p-3 space-y-2">
+                          <div className="h-6 w-6 rounded-md bg-background shadow-sm" />
+                          <div className="h-2 w-16 bg-muted-foreground/20 rounded" />
+                        </div>
+                      ))}
+                    </div>
+                    <div className="h-40 rounded-lg bg-gradient-to-br from-primary/5 to-accent/5 border border-border/30 relative flex items-center justify-center">
+                      <Bot className="h-12 w-12 text-primary/40" />
+                      <div className="absolute bottom-4 left-4 right-4 h-2 bg-background/50 rounded-full overflow-hidden">
+                        <div className="h-full w-2/3 bg-primary/60 rounded-full" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
+        </section>
 
-          {/* Feature 2: Auth */}
-          <Card className="col-span-full md:col-span-1 border-muted">
-            <CardHeader>
-              <Shield className="h-6 w-6 text-emerald-600 mb-2" />
-              <CardTitle>Auth + Protection</CardTitle>
-              <CardDescription>
-                Clerk authentication pre-configured with middleware protection.
-              </CardDescription>
-            </CardHeader>
-          </Card>
+        {/* FEATURES GRID */}
+        <section className="container mx-auto px-4 pt-32" id="features">
+          <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
+            <h2 className="text-3xl font-bold tracking-tight">Everything you need</h2>
+            <p className="text-muted-foreground">Every component is crafted with attention to detail and designed to be easily customized.</p>
+          </div>
 
-          {/* Feature 3: Performance */}
-          <Card className="col-span-full md:col-span-1 border-muted">
-            <CardHeader>
-              <Zap className="h-6 w-6 text-amber-500 mb-2" />
-              <CardTitle>App Router</CardTitle>
-              <CardDescription>
-                Next.js 14+ App Router for blazing fast server components.
-              </CardDescription>
-            </CardHeader>
-          </Card>
-
-          {/* Feature 4: Shadcn UI */}
-          <Card className="col-span-full md:col-span-1 lg:col-span-2 border-muted bg-stone-50 dark:bg-stone-900">
-            <CardHeader>
-              <LayoutTemplate className="h-6 w-6 text-stone-600 dark:text-stone-400 mb-2" />
-              <CardTitle>Premium UI Design</CardTitle>
-              <CardDescription>
-                An "Earthy/Organic" theme built on Tailwind CSS v4 and shadcn/ui.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="h-32 flex items-end gap-2 pb-0">
-              <div className="h-24 w-20 bg-background rounded-t-lg border shadow-sm mx-auto" />
-              <div className="h-32 w-20 bg-background rounded-t-lg border shadow-sm mx-auto" />
-              <div className="h-20 w-20 bg-background rounded-t-lg border shadow-sm mx-auto" />
-            </CardContent>
-          </Card>
-
-          {/* Feature 5: Launch Ready */}
-          <Card className="col-span-full md:col-span-2 lg:col-span-2 bg-primary text-primary-foreground border-primary">
-            <CardHeader>
-              <Rocket className="h-8 w-8 mb-2" />
-              <CardTitle className="text-xl">Launch in minutes</CardTitle>
-              <CardDescription className="text-primary-foreground/80">
-                SEO optimized metadata, Open Graph ready, and clean code structure.
-              </CardDescription>
-            </CardHeader>
-          </Card>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="mt-auto border-t py-8 text-center text-sm text-muted-foreground">
-        <p>© 2026 NovaKit AI. Built for the future.</p>
-      </footer>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <FeatureCard
+              icon={<Zap className="w-5 h-5 text-amber-500" />}
+              title="Fast Setup"
+              desc="Next.js 15 + Tailwind v4 pre-configured."
+            />
+            <FeatureCard
+              icon={<Layout className="w-5 h-5 text-blue-500" />}
+              title="Modern UI"
+              desc="Aniq-inspired layout with Earthy themes."
+            />
+            <FeatureCard
+              icon={<Bot className="w-5 h-5 text-emerald-500" />}
+              title="AI Ready"
+              desc="Gemini integration baked in via Server Actions."
+            />
+            <FeatureCard
+              icon={<ShieldCheck className="w-5 h-5 text-rose-500" />}
+              title="Auth"
+              desc="Clerk authentication with middleware protection."
+              span={true}
+            />
+          </div>
+        </section>
+      </main>
     </div>
   );
+}
+
+function FeatureCard({ icon, title, desc, span = false }: { icon: React.ReactNode, title: string, desc: string, span?: boolean }) {
+  return (
+    <div className={`group relative rounded-2xl border border-border/50 bg-background/30 p-6 hover:bg-background/80 transition-colors ${span ? 'lg:col-span-1' : ''}`}>
+      <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-background border border-border shadow-sm group-hover:scale-110 transition-transform">
+        {icon}
+      </div>
+      <h3 className="mb-2 font-semibold text-foreground">{title}</h3>
+      <p className="text-sm text-muted-foreground">{desc}</p>
+    </div>
+  )
 }
