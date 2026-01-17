@@ -1,13 +1,13 @@
 import Link from "next/link";
-import { UserButton } from "@clerk/nextjs";
 import {
     LayoutDashboard,
-    BarChart3,
+    BarChart2,
     Sparkles,
     Settings,
-    Menu
+    LogOut,
+    Cpu
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+// import { signOut } from "@/auth"; // We would use text-auth signout here in a real server component or client button
 
 export default function DashboardLayout({
     children,
@@ -15,71 +15,54 @@ export default function DashboardLayout({
     children: React.ReactNode
 }) {
     return (
-        <div className="flex min-h-screen w-full flex-col bg-muted/40 md:flex-row">
+        <div className="flex min-h-screen w-full bg-[#000c18] text-slate-200 font-mono">
             {/* Sidebar */}
-            <aside className="hidden w-64 flex-col border-r bg-background md:flex">
-                <div className="flex h-16 items-center gap-2 border-b px-6 font-semibold">
-                    <Sparkles className="h-6 w-6 text-primary" />
-                    <span>NovaKit AI</span>
+            <aside className="hidden w-64 flex-col border-r border-white/10 bg-[#022644]/50 backdrop-blur-xl md:flex">
+                <div className="flex h-16 items-center gap-2 border-b border-white/10 px-6">
+                    <Cpu className="h-6 w-6 text-cyan-400 animate-pulse" />
+                    <span className="font-bold tracking-widest text-white">N-KIT v2</span>
                 </div>
                 <nav className="flex flex-1 flex-col gap-2 p-4">
-                    <Link
-                        href="/dashboard"
-                        className="flex items-center gap-3 rounded-lg bg-secondary px-3 py-2 text-foreground transition-all hover:text-primary"
-                    >
-                        <LayoutDashboard className="h-4 w-4" />
-                        Dashboard
-                    </Link>
-                    <Link
-                        href="/dashboard/analytics"
-                        className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted"
-                    >
-                        <BarChart3 className="h-4 w-4" />
-                        Analytics
-                    </Link>
-                    <Link
-                        href="/dashboard/ai-chat"
-                        className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted"
-                    >
-                        <Sparkles className="h-4 w-4" />
-                        AI Assistant
-                    </Link>
-                    <Link
-                        href="/dashboard/settings"
-                        className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted"
-                    >
-                        <Settings className="h-4 w-4" />
-                        Settings
-                    </Link>
+                    <NavLink href="/dashboard" icon={<LayoutDashboard />} label="Command Center" />
+                    <NavLink href="/dashboard/analytics" icon={<BarChart2 />} label="Data Stream" />
+                    <NavLink href="/dashboard/ai-chat" icon={<Sparkles />} label="Neural AI" />
+                    <NavLink href="/dashboard/settings" icon={<Settings />} label="Config" />
                 </nav>
-                <div className="border-t p-4">
-                    <div className="rounded-lg border bg-card p-4 shadow-sm">
-                        <h3 className="mb-2 font-semibold">Upgrade to Pro</h3>
-                        <p className="mb-4 text-xs text-muted-foreground">
-                            Unlock advanced AI features and analytics.
-                        </p>
-                        <Button size="sm" className="w-full">
-                            Upgrade
-                        </Button>
-                    </div>
+                <div className="border-t border-white/10 p-4">
+                    <Link href="/" className="flex items-center gap-3 rounded-lg px-3 py-2 text-red-400 hover:bg-white/5 transition-colors">
+                        <LogOut className="h-4 w-4" />
+                        <span className="text-sm">Disconnect</span>
+                    </Link>
                 </div>
             </aside>
 
-            {/* Mobile & Main Content */}
-            <div className="flex flex-1 flex-col">
-                <header className="flex h-16 items-center gap-4 border-b bg-background px-6">
-                    <Button variant="outline" size="icon" className="md:hidden">
-                        <Menu className="h-5 w-5" />
-                    </Button>
-                    <div className="w-full flex-1">
-                        <h1 className="text-lg font-semibold md:text-xl">Overview</h1>
+            {/* Main Content */}
+            <div className="flex flex-1 flex-col overflow-hidden">
+                <header className="flex h-16 items-center border-b border-white/10 bg-[#022644]/30 px-6 backdrop-blur-sm">
+                    <div className="ml-auto flex items-center gap-4">
+                        <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+                        <span className="text-xs text-slate-400 tracking-widest">NET_UPLINK: ACTIVE</span>
+                        <div className="h-8 w-8 rounded bg-cyan-900/50 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xs">U1</div>
                     </div>
-                    <UserButton />
                 </header>
-                <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
+                <main className="flex-1 overflow-y-auto bg-grid-scientific p-6">
                     {children}
                 </main>
             </div>
         </div>
     );
 }
+
+function NavLink({ href, icon, label }: { href: string, icon: any, label: string }) {
+    return (
+        <Link
+            href={href}
+            className="flex items-center gap-3 rounded-lg px-3 py-2 text-slate-400 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all border border-transparent hover:border-cyan-500/20"
+        >
+            {React.cloneElement(icon, { className: "h-4 w-4" })}
+            <span className="text-sm tracking-wide">{label}</span>
+        </Link>
+    )
+}
+
+import React from "react";
